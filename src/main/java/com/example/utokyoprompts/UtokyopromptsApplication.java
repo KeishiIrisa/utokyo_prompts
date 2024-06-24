@@ -10,7 +10,7 @@ public class UtokyopromptsApplication {
 
         SpringApplication.run(UtokyopromptsApplication.class, args);
 
-        System.out.println("hello Keishi");
+        System.out.println("Hello Keishi!");
     }
 
 }
