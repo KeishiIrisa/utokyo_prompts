@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
 @Controller
 @RequestMapping(path = "/user")
 public class UserController {
@@ -16,8 +20,28 @@ public class UserController {
     public @ResponseBody String addNewUser (@RequestParam String name) {
         Users n = new Users();
         n.setName(name);
+        n.setCreated_at(LocalDateTime.now());
         userRepository.save(n);
-        return "Saved";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = LocalDateTime.now().format(formatter);
+        return "Saved! Current time: " + formattedDateTime;
+    }
+
+    @PostMapping(path = "/delete")
+    public @ResponseBody String deleteUser(@RequestParam Integer id) {
+        Optional<Users> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            try {
+                userRepository.deleteById(id);
+                return "User with id " + id + " deleted!";
+            } catch (Exception e) {
+                return "Error: Unexpected error occurred while deleting user with id " + id;
+            }
+        } else {
+            return "Error: User with id " + id + " not found";
+        }
+
     }
 
     @GetMapping(path = "/all")
