@@ -2,10 +2,10 @@
 erDiagram
     users ||--o{ comments : "1人のユーザーに0以上のコメント"
     users ||--o{ prompts : "1人のユーザーに0以上のプロンプト"
-    users ||--O{ user_classes : "1人のユーザーに0以上のクラス"
-    classes ||--O{ user_classes : "1つのクラスに0以上のユーザー"
+    users ||--O{ user_lesson : "1人のユーザーに0以上のクラス"
+    lessons ||--O{ user_lesson : "1つのクラスに0以上のユーザー"
     prompts ||--o{ comments : "1つのプロンプトに0以上のコメント"
-    classes ||--o{ prompts : "1つのクラスに0以上のプロンプト"
+    lessons ||--o{ prompts : "1つのクラスに0以上のプロンプト"
 
     users {
         bigint id PK
@@ -14,7 +14,7 @@ erDiagram
         timestamp deleted_at
     }
 
-    classes {
+    lessons {
         bigint id PK
         string name "ユーザーネーム"
         string category "カテゴリー"
@@ -24,7 +24,7 @@ erDiagram
         bigint id PK
         string prompts "プロンプト"
         references owner_id FK
-        references class_id FK
+        references lesson_id FK
         timestamp created_at
         timestamp modified_at
     }
@@ -38,10 +38,10 @@ erDiagram
         timestamp deleted_at
     }
 
-    user_classes {
+    user_lesson {
         bigint id PK
         references user_id FK
-        references class_id FK
+        references lesson_id FK
     }
   
 ```
