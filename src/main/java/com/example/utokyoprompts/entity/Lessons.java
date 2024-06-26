@@ -1,9 +1,8 @@
 package com.example.utokyoprompts.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Lessons {
@@ -12,6 +11,8 @@ public class Lessons {
     private Integer id;
     private String name;
     private String category;
+    @OneToMany
+    List<UserLesson> userLessons;
 
     public Integer getId() {
         return id;

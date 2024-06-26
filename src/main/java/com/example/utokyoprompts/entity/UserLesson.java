@@ -13,8 +13,8 @@ public class UserLesson {
     private Users user_id;
 
     @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Lessons class_id;
+    @JoinColumn(name = "lesson_id")
+    private Lessons lesson_id;
 
     public Users getUser_id() {
         return user_id;
@@ -24,11 +24,11 @@ public class UserLesson {
         this.user_id = user_id;
     }
 
-    public Lessons getClass_id() {
-        return class_id;
+    public Lessons getLesson_id() {
+        return lesson_id;
     }
 
-    public void setClass_id(Lessons class_id) {
-        this.class_id = class_id;
+    public void setLesson_id(Lessons class_id) {
+        this.lesson_id = lesson_id;
     }
 }

@@ -1,12 +1,10 @@
 package com.example.utokyoprompts.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Users {
@@ -16,6 +14,9 @@ public class Users {
     private String name;
     private LocalDateTime created_at;
     private LocalDateTime deleted_at;
+
+    @OneToMany
+    List<UserLesson> userLessons;
 
     public Integer getId() {
         return id;
