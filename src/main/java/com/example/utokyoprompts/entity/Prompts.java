@@ -14,7 +14,7 @@ public class Prompts {
     private Users owner_id;
     @ManyToOne
     @JoinColumn(name = "class_id")
-    private Classes class_id;
+    private Lessons class_id;
     private LocalDateTime created_at;
     private LocalDateTime modified_at;
 
@@ -42,11 +42,11 @@ public class Prompts {
         this.owner_id = owner_id;
     }
 
-    public Classes getClass_id() {
+    public Lessons getClass_id() {
         return class_id;
     }
 
-    public void setClass_id(Classes class_id) {
+    public void setClass_id(Lessons class_id) {
         this.class_id = class_id;
     }
 
