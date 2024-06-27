@@ -11,10 +11,10 @@ public class Prompts {
     private String prompts;
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    private Users owner_id;
+    private Users owner;
     @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Lessons class_id;
+    @JoinColumn(name = "lesson_id")
+    private Lessons lesson;
     private LocalDateTime created_at;
     private LocalDateTime modified_at;
 
@@ -34,20 +34,20 @@ public class Prompts {
         this.prompts = prompts;
     }
 
-    public Users getOwner_id() {
-        return owner_id;
+    public Users getOwner() {
+        return owner;
     }
 
-    public void setOwner_id(Users owner_id) {
-        this.owner_id = owner_id;
+    public void setOwner(Users owner_id) {
+        this.owner = owner_id;
     }
 
-    public Lessons getClass_id() {
-        return class_id;
+    public Lessons getLesson() {
+        return lesson;
     }
 
-    public void setClass_id(Lessons class_id) {
-        this.class_id = class_id;
+    public void setLesson(Lessons class_id) {
+        this.lesson = class_id;
     }
 
     public LocalDateTime getCreated_at() {

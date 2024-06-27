@@ -35,8 +35,8 @@ public class UserLessonController {
             Users user = usersOptional.get();
             Lessons lesson = lessonsOptional.get();
 
-            n.setUser_id(user);
-            n.setLesson_id(lesson);
+            n.setUser(user);
+            n.setLesson(lesson);
             userLessonRepository.save(n);
             String formattedMessage = MessageFormatter.formatMessage("UserLesson Saved!");
             return formattedMessage;
@@ -45,6 +45,26 @@ public class UserLessonController {
             return formattedMessage;
         }
 
+    }
+
+    @PostMapping(path = "/delete")
+    public @ResponseBody String deleteUserLesson (@RequestParam Integer userid, @RequestParam Integer lessonid) {
+        Optional<Users> usersOptional = usersRepository.findById(userid);
+        Optional<Lessons> lessonsOptional = lessonsRepository.findById(lessonid);
+        if (usersOptional.isPresent() && lessonsOptional.isPresent()) {
+            Users user = usersOptional.get();
+            Lessons lesson = lessonsOptional.get();
+            Optional<UserLesson> userLessonOptional = userLessonRepository.findByUserAndLesson(user, lesson);
+            if (userLessonOptional.isPresent()) {
+                UserLesson userLesson = userLessonOptional.get();
+                userLessonRepository.delete(userLesson);
+                return MessageFormatter.formatMessage("UserLesson deleted!");
+            } else {
+                return MessageFormatter.formatMessage("Error: No such a field..");
+            }
+        } else {
+            return MessageFormatter.formatMessage("Error: No such a user or lesson..");
+        }
     }
 
     @GetMapping(path = "/all")

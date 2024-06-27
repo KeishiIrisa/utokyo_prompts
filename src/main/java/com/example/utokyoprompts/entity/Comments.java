@@ -10,10 +10,10 @@ public class Comments {
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    private Users owner_id;
+    private Users owner;
     @ManyToOne
     @JoinColumn(name = "prompt_id")
-    private Prompts prompt_id;
+    private Prompts prompt;
     private String content;
     private LocalDateTime created_at;
     private LocalDateTime deleted_at;
@@ -26,20 +26,20 @@ public class Comments {
         this.id = id;
     }
 
-    public Users getOwner_id() {
-        return owner_id;
+    public Users getOwner() {
+        return owner;
     }
 
-    public void setOwner_id(Users owner_id) {
-        this.owner_id = owner_id;
+    public void setOwner(Users owner_id) {
+        this.owner = owner_id;
     }
 
-    public Prompts getPrompt_id() {
-        return prompt_id;
+    public Prompts getPrompt() {
+        return prompt;
     }
 
-    public void setPrompt_id(Prompts prompt_id) {
-        this.prompt_id = prompt_id;
+    public void setPrompt(Prompts prompt_id) {
+        this.prompt = prompt_id;
     }
 
     public String getContent() {

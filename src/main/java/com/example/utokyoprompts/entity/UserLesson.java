@@ -10,25 +10,25 @@ public class UserLesson {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Users user_id;
+    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "lesson_id")
-    private Lessons lesson_id;
+    private Lessons lesson;
 
-    public Users getUser_id() {
-        return user_id;
+    public Users getUser() {
+        return user;
     }
 
-    public void setUser_id(Users user_id) {
-        this.user_id = user_id;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
-    public Lessons getLesson_id() {
-        return lesson_id;
+    public Lessons getLesson() {
+        return lesson;
     }
 
-    public void setLesson_id(Lessons class_id) {
-        this.lesson_id = lesson_id;
+    public void setLesson(Lessons lesson) {
+        this.lesson = lesson;
     }
 }
