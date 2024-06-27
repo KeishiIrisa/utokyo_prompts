@@ -23,16 +23,16 @@ erDiagram
     prompts {
         bigint id PK
         string prompts "プロンプト"
-        references owner_id FK
-        references lesson_id FK
+        references owner FK "user_id"
+        references lesson FK "lesson_id"
         timestamp created_at
         timestamp modified_at
     }
 
     comments {
         bigint id PK
-        references owner_id FK
-        references prompt_id FK
+        references owner FK "user_id"
+        references prompt FK "prompt_id"
         string content "コメント内容"
         timestamp created_at
         timestamp deleted_at
@@ -40,8 +40,8 @@ erDiagram
 
     user_lesson {
         bigint id PK
-        references user_id FK
-        references lesson_id FK
+        references user FK "user_id"
+        references lesson FK "lesson_id"
     }
   
 ```
