@@ -4,8 +4,10 @@ import com.example.utokyoprompts.entity.Lessons;
 import com.example.utokyoprompts.repository.LessonsRepository;
 import com.example.utokyoprompts.util.MessageFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -45,5 +47,17 @@ public class LessonsController {
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Lessons> getAllLessons () {
         return lessonsRepository.findAll();
+    }
+
+    @GetMapping(path = "/{id}")
+    public @ResponseBody Lessons getLessonById (@PathVariable Integer id) {
+        Optional<Lessons> lessonsOptional = lessonsRepository.findById(id);
+        if (lessonsOptional.isPresent()) {
+            return lessonsOptional.get();
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, String.format("Not found lesson with %d", id)
+            );
+        }
     }
 }

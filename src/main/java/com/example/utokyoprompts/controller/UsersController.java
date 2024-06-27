@@ -4,8 +4,10 @@ import com.example.utokyoprompts.entity.Users;
 import com.example.utokyoprompts.repository.UsersRepository;
 import com.example.utokyoprompts.util.MessageFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -20,7 +22,6 @@ public class UsersController {
     public @ResponseBody String addNewUser (@RequestParam String name) {
         Users n = new Users();
         n.setName(name);
-        n.setCreated_at(LocalDateTime.now());
         usersRepository.save(n);
 
         String formattedMessage = MessageFormatter.formatMessage("New User Saved!");
@@ -46,6 +47,18 @@ public class UsersController {
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Users> getAllUsers() {
         return usersRepository.findAll();
+    }
+
+    @GetMapping(path = "/{id}")
+    public @ResponseBody Users getUserById(@PathVariable Integer id) {
+        Optional<Users> usersOptional = usersRepository.findById(id);
+        if (usersOptional.isPresent()) {
+            return usersOptional.get();
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, String.format("Not found user with %d", id)
+            );
+        }
     }
 
 }

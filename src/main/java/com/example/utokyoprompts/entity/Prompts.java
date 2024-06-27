@@ -65,4 +65,9 @@ public class Prompts {
     public void setModified_at(LocalDateTime modified_at) {
         this.modified_at = modified_at;
     }
+
+    @PrePersist
+    public void prePersist() {
+        created_at = LocalDateTime.now();
+    }
 }

@@ -43,4 +43,9 @@ public class Users {
     public LocalDateTime getDeleted_at() {
         return deleted_at;
     }
+
+    @PrePersist
+    public void prePersist() {
+        created_at = LocalDateTime.now();
+    }
 }

@@ -5,8 +5,11 @@ import com.example.utokyoprompts.entity.UserLesson;
 import com.example.utokyoprompts.entity.Users;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserLessonRepository extends CrudRepository<UserLesson, Integer> {
     Optional<UserLesson> findByUserAndLesson(Users user, Lessons lesson);
+    List<UserLesson> findByUser (Users user);
+    List<UserLesson> findByLesson (Lessons lesson);
 }

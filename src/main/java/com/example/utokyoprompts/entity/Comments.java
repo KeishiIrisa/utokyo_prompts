@@ -65,4 +65,9 @@ public class Comments {
     public void setDeleted_at(LocalDateTime deleted_at) {
         this.deleted_at = deleted_at;
     }
+
+    @PrePersist
+    public void prePersist() {
+        created_at = LocalDateTime.now();
+    }
 }
