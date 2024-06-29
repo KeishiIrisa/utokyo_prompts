@@ -17,19 +17,15 @@ public class LessonsController {
     @Autowired
     private LessonsRepository lessonsRepository;
 
-    @PostMapping(path = "/add")
-    public @ResponseBody String addNewLesson (@RequestParam String name, @RequestParam String category) {
-        Lessons n = new Lessons();
-        n.setName(name);
-        n.setCategory(category);
-        lessonsRepository.save(n);
-
+    @PostMapping(path = "/")
+    public @ResponseBody String addNewLesson (@RequestBody Lessons lesson) {
+        lessonsRepository.save(lesson);
         String formattedMessage = MessageFormatter.formatMessage("New Lesson Saved!");
         return formattedMessage;
     }
 
-    @PostMapping(path = "/delete")
-    public @ResponseBody String deleteLesson(@RequestParam Integer id) {
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody String deleteLesson(@PathVariable Integer id) {
         Optional<Lessons> lessonsOptional = lessonsRepository.findById(id);
         if (lessonsOptional.isPresent()) {
             try {

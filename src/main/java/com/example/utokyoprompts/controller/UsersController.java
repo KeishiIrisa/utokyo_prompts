@@ -13,13 +13,13 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path = "/user")
+@RequestMapping(path = "/users")
 public class UsersController {
     @Autowired
     private UsersRepository usersRepository;
 
-    @PostMapping(path = "/add")
-    public @ResponseBody String addNewUser (@RequestParam String name) {
+    @PostMapping(path = "/{name}")
+    public @ResponseBody String addNewUser (@PathVariable String name) {
         Users n = new Users();
         n.setName(name);
         usersRepository.save(n);
@@ -28,8 +28,8 @@ public class UsersController {
         return formattedMessage;
     }
 
-    @PostMapping(path = "/delete")
-    public @ResponseBody String deleteUser(@RequestParam Integer id) {
+    @DeleteMapping (path = "/{id}")
+    public @ResponseBody String deleteUser(@PathVariable Integer id) {
         Optional<Users> userOptional = usersRepository.findById(id);
         if (userOptional.isPresent()) {
             try {

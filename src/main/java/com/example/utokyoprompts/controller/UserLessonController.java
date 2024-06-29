@@ -28,8 +28,8 @@ public class UserLessonController {
     @Autowired
     private LessonsRepository lessonsRepository;
 
-    @PostMapping(path = "/add")
-    public @ResponseBody String addUserLesson (@RequestParam Integer userid, @RequestParam Integer lessonid) {
+    @PostMapping(path = "/users/{userid}/lessons/{lessonid}")
+    public @ResponseBody String addUserLesson (@PathVariable Integer userid, @PathVariable Integer lessonid) {
         UserLesson n = new UserLesson();
 
         // UserとLessonオブジェクトをidによって作成
@@ -52,8 +52,8 @@ public class UserLessonController {
 
     }
 
-    @PostMapping(path = "/delete")
-    public @ResponseBody String deleteUserLesson (@RequestParam Integer userid, @RequestParam Integer lessonid) {
+    @DeleteMapping(path = "/users/{userid}/lessons/{lessonid}")
+    public @ResponseBody String deleteUserLesson (@PathVariable Integer userid, @PathVariable Integer lessonid) {
         Optional<Users> usersOptional = usersRepository.findById(userid);
         Optional<Lessons> lessonsOptional = lessonsRepository.findById(lessonid);
         if (usersOptional.isPresent() && lessonsOptional.isPresent()) {
